@@ -1,2 +1,5 @@
 This is a place to store your custom spec files, patches, etc. that are
 used to build the RPMs going into the 3rdparty RPM repository
+
+Running make in this directory with default target should trigger
+all makes in subdirectories, build all RPM's and put them here.
