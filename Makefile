@@ -9,7 +9,7 @@ SUB_DIRS := $(dir $(wildcard */Makefile ) )
 TOP_TARGETS := all clean
 $(TOP_TARGETS): $(SUB_DIRS)
 $(SUB_DIRS):
-	@echo [$(abspath $@)]: make $(MAKECMDGOALS)
+	@echo [$(patsubst %/,%,$@)]: make $(MAKECMDGOALS)
 	@$(MAKE) --no-print-directory $(SUBMAKE_VARS) -C $@ $(MAKECMDGOALS)
 .PHONY: $(TOP_TARGETS) $(SUB_DIRS) $(SUB_MAKES)
 
