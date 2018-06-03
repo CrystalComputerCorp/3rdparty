@@ -11,11 +11,13 @@ ifeq ($(OS_VER),7)
 
 all: x86_64 i686
 x86_64:
-	rpmbuild $(RPM_BUILDOPTS) -ba freetds.spec
+	rpmbuild $(RPM_BUILDOPTS) \
+	    --define 'dist $(shell rpmbuild --eval %dist | sed -e s/.centos//)' \
+	    -ba freetds.spec
 i686:
 	setarch i386 \
 	    /usr/bin/mock -r centos-7-i386 \
-	    --define 'dist $(shell rpmbuild --eval %dist)' \
+	    --define 'dist $(shell rpmbuild --eval %dist | sed -e s/.centos//)' \
 	    --resultdir $(shell pwd) \
 	    rebuild *.src.rpm \
 	&& rm -f *.log
