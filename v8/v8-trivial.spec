@@ -1,15 +1,12 @@
-#  $Id: //depot/sw_eng/crystal_vision/cv7-3-3/src/rpm/cmr.spec#9 $
+#  $Id$
 
 %define _builddir ./
-%define _sourcedir ./
-%define _rpmdir ./
-
 %define _src ./
 %define _image ./imagev849/
 
 Name:           v849
 Version:        4.9.391
-Release:        2%{?dist}
+Release:        3%{?dist}
 Vendor:         Crystal Computer Corporation
 Summary:        JavaScript Engine
 Group:          System Environment/Libraries
@@ -17,18 +14,25 @@ License:        BSD
 URL:            http://code.google.com/p/v8
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  python
+BuildRequires:  chrpath
+BuildRequires:  util-linux
 
 %description
 V8 is Google's open source JavaScript engine. V8 is written in C++ and is used 
 in Google Chrome, the open source browser from Google. V8 implements ECMAScript 
 as specified in ECMA-262, 3rd edition.
 
+See $Id$
+
 %install
 
 mkdir -p $RPM_BUILD_ROOT
 cp -a %{_image}/* $RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -name libplatform.h -exec sed -i 's|#include "include/v8-platform.h"|#include <v8-platform.h>|' {} \;
-
+chrpath --replace \$ORIGIN/ \
+    $RPM_BUILD_ROOT/opt/crystal/lib/v8/4.9/d8 \
+    $RPM_BUILD_ROOT/opt/crystal/lib/v8/4.9/libv8.so \
+    $RPM_BUILD_ROOT/opt/crystal/lib/v8/4.9/libicui18n.so
 %clean
 
 rm -rf $RPM_BUILD_ROOT
@@ -40,6 +44,7 @@ ldconfig /opt/crystal/lib/v8/4.9
 %defattr(755,root,root,755)
 %dir /opt/crystal/lib/v8/4.9
 /opt/crystal/lib/v8/4.9/d8
+%defattr(644,root,root,755)
 /opt/crystal/lib/v8/4.9/libv8.so
 /opt/crystal/lib/v8/4.9/libicuuc.so
 /opt/crystal/lib/v8/4.9/libicui18n.so
