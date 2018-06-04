@@ -1,0 +1,12 @@
+diff -up gtest-1.6.0/scripts/gtest-config.in.m1 gtest-1.6.0/scripts/gtest-config.in
+--- gtest-1.6.0/scripts/gtest-config.in.m1	2011-04-15 15:49:11.000000000 -0400
++++ gtest-1.6.0/scripts/gtest-config.in	2018-06-04 14:03:04.587599749 -0400
+@@ -195,7 +195,7 @@ done
+ # overridden by environment variables or command line parameters.
+ prefix="${GTEST_PREFIX:-@prefix@}"
+ exec_prefix="${GTEST_EXEC_PREFIX:-@exec_prefix@}"
+-libdir="${GTEST_LIBDIR:-@libdir@}"
++libdir="${GTEST_LIBDIR:/usr/lib64}"
+ includedir="${GTEST_INCLUDEDIR:-@includedir@}"
+ 
+ # We try and detect if our binary is not located at its installed location. If

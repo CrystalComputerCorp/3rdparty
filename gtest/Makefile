@@ -12,7 +12,7 @@ all: x86_64 i686
 x86_64: 
 	rpmbuild $(RPM_BUILDOPTS) \
 	    --define 'dist $(shell rpmbuild --eval %dist | sed -e s/.centos//)' \
-	    --rebuild *.src.rpm
+	    -ba gtest.spec
 i686:
 	setarch i386 \
 	    /usr/bin/mock -r centos-7-i386 \
@@ -26,4 +26,4 @@ all: x86_64 i686
 endif
 
 clean:
-	@rm -f *.x86_64.rpm *.i686.rpm *.log
+	@rm -f *.rpm *.log
