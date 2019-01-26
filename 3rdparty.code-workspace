@@ -18,9 +18,6 @@
 		"files.associations": {
 			"Makefile*": "makefile",
 			"*.mak": "makefile"
-		},
-		"terminal.integrated.shell.windows": "C:\\Windows\\System32\\OpenSSH\\ssh.exe",
-		"terminal.integrated.shellArgs.windows": ["-t","root@192.168.184.17","cd /root/p4/platforms/;", "bash -l"]
-		// NOTE: do not change the order of arguments to shellArgs! Tasks pull from here!
+		}
 	}
 }
