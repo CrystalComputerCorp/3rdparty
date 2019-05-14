@@ -24,7 +24,14 @@ i686:
 	    --resultdir $(shell pwd) \
 	    rebuild *.src.rpm \
 	&& rm -f *.log
-else
+endif
+ifeq ($(OS_VER),6)
+all: $(ZMQ_TARBALL)
+	rpmbuild $(RPM_BUILDOPTS) \
+	    --define 'dist $(shell rpmbuild --eval %dist | sed -e s/.centos//)' \
+	    -ba zeromq.spec
+endif
+ifeq ($(OS_VER),5)
 all: x86_64 i686
 	@echo "Nothing to do for this OS version"
 endif
